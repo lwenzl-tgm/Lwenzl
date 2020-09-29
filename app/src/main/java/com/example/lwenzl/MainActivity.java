@@ -1,17 +1,12 @@
 package com.example.lwenzl;
 
-import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,38 +14,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }   
+    public void submit(View view){
+        TextView name_input = findViewById(R.id.name2);
+        TextView address_input = findViewById(R.id.adresse_input);
+        TextView bday_input = findViewById(R.id.bday_input);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("name", name_input.getText().toString());
+        i.putExtra("address", address_input.getText().toString());
+        i.putExtra("bday", bday_input.getText().toString());
+        startActivity(i);
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    public void cancel(View view){
+        EditText name_input = findViewById(R.id.name2);
+        EditText address_input = findViewById(R.id.adresse_input);
+        EditText bday_input = findViewById(R.id.bday_input);
 
-        return super.onOptionsItemSelected(item);
+        name_input.setText("");
+        address_input.setText("");
+        bday_input.setText("");
     }
 }
